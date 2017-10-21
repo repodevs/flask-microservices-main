@@ -85,6 +85,11 @@ Remove image:
 ```bash
 $ docker rmi $(docker images -q)
 ```
+Export local environment:
+```bash
+$ export REACT_APP_USERS_SERVICE_URL=HTTP://IP_DOCKER_APP_USER
+```
+
 ---
 Access database via psql:
 ```bash

@@ -39,4 +39,23 @@ services:
       users-service:
         condition: service_started
     links:
-        - users-service
+      - users-service
+
+
+  web-service:
+    container_name: web-service
+    build:
+      context: https://github.com/repodevs/flask-microservices-client.git
+      args:
+        - NODE_ENV=development
+        - REACT_APP_USERS_SERVICE_URL=${REACT_APP_USERS_SERVICE_URL}
+    ports:
+      - '9000:9000' # expose ports - HOST:CONTAINER
+    environment:
+      - NODE_ENV=development
+      - REACT_APP_USERS_SERVICE_URL=${REACT_APP_USERS_SERVICE_URL}
+    depends_on:
+      users-service:
+        condition: service_started
+    links:
+      - users-service
