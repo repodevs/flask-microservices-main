@@ -38,8 +38,11 @@ services:
     depends_on:
       users-service:
         condition: service_started
+      web-service:
+        condition: service_started
     links:
       - users-service
+      - web-service
 
 
   web-service:
