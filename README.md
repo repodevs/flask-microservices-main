@@ -21,11 +21,15 @@ $ docker-machine create --driver virtualbox dev
 ```bash
 $ eval $(docker-machine env dev)
 ```
-3. Build the images and spin up the containers
+3. add environment
+```bash
+$ export REACT_APP_USERS_SERVICE_URL=http://DOCKER_MACHINE_IP
+```
+4. Build the images and spin up the containers
 ```bash
 $ docker-compose up -d --build
 ```
-4. create and seed the db then run the tests
+5. create and seed the db then run the tests
 ```bash
 $ docker-compose run users-service python manage.py recreate_db
 $ docker-compose run users-service python manage.py seed_db
@@ -45,21 +49,26 @@ $ docker-machine create --driver digitalocean --digitalocean-access-token=DO_TOK
 ```bash
 $ eval "$(docker-machine env prod)"
 ```
-3. Build the images and spin up the containers
+3. add environment
+```bash
+$ export REACT_APP_USERS_SERVICE_URL=http://DOCKER_MACHINE_IP
+$ export SECRET_KEY=MyS3cr3tK3y
+```
+4. Build the images and spin up the containers
 ```bash
 $ docker-compose -f docker-compose-prod.yml up -d --build
 ```
-4. create and seed the db then run the tests
+5. create and seed the db then run the tests
 ```bash
 $ docker-compose -f docker-compose-prod.yml run users-service python manage.py recreate_db
 $ docker-compose -f docker-compose-prod.yml run users-service python manage.py seed_db
 $ docker-compose -f docker-compose-prod.yml run users-service python manage.py test
 ```
-5. watch the logs
+6. watch the logs
 ```bash
 $ docker-compose logs -f users-service
 ```
-6. grab ip
+7. grab ip
 ```bash
 $ docker-machine ip prod
 ```
